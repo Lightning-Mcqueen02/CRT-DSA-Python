@@ -1,0 +1,224 @@
+ CRT TRAINING - DAY 5
+
+Date: 9 October 2026  
+Language: Python 3
+
+ 1. MAXIMUM SUM SUBARRAY OF SIZE K (GeeksforGeeks)
+
+**CONCEPT:**
+
+Find the maximum sum of any contiguous subarray of size `k`.
+
+**KEY POINTS:**
+
+- Calculate the sum of the first `k` elements.
+- Subtract the element leaving the window.
+- Add the next element entering the window.
+- Update the maximum sum whenever a larger sum is found.
+
+**CODE:**
+
+```python
+class Solution:
+    def maximumSumSubarray(self, arr, k):
+        window_sum = sum(arr[:k])
+        max_sum = window_sum
+
+        for i in range(k, len(arr)):
+            window_sum = window_sum - arr[i - k] + arr[i]
+
+            if window_sum > max_sum:
+                max_sum = window_sum
+
+        return max_sum
+```
+
+ 2. MAX CONSECUTIVE ONES (LeetCode 485)
+
+**CONCEPT:**
+
+Find the maximum number of consecutive 1s in a binary array.
+
+**KEY POINTS:**
+
+- Increase `count` when the current element is 1.
+- Reset `count` to 0 when the element is 0.
+- Store the maximum count found so far.
+
+**CODE:**
+
+```python
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: list[int]) -> int:
+        count = 0
+        max_count = 0
+
+        for i in nums:
+            if i == 1:
+                count += 1
+
+                if count > max_count:
+                    max_count = count
+            else:
+                count = 0
+
+        return max_count
+```
+
+ 3. MAXIMUM AVERAGE SUBARRAY I (LeetCode 643)
+
+**CONCEPT:**
+
+Find the maximum average value among all contiguous subarrays of size `k`.
+
+**KEY POINTS:**
+
+- Calculate the sum of the first `k` elements.
+- Update the sum while moving through the array.
+- Store the maximum sum.
+- Divide the maximum sum by `k` to get the average.
+
+**CODE:**
+
+```python
+class Solution:
+    def findMaxAverage(self, nums: list[int], k: int) -> float:
+        window_sum = sum(nums[:k])
+        max_sum = window_sum
+
+        for i in range(k, len(nums)):
+            window_sum = window_sum - nums[i - k] + nums[i]
+
+            if window_sum > max_sum:
+                max_sum = window_sum
+
+        return max_sum / k
+```
+
+ 4. NUMBER OF SUBARRAYS OF SIZE K AND AVERAGE GREATER THAN OR EQUAL TO THRESHOLD (LeetCode 1343)
+
+**CONCEPT:**
+
+Count the subarrays of size `k` whose average is greater than or equal to the given threshold.
+
+**KEY POINTS:**
+
+- Calculate the sum of the first `k` elements.
+- Average = `window_sum / k`.
+- Instead of calculating the average, check whether `window_sum >= k * threshold`.
+- Count every subarray that satisfies the condition.
+
+**CODE:**
+
+```python
+class Solution:
+    def numOfSubarrays(self, arr: list[int], k: int, threshold: int) -> int:
+        window_sum = sum(arr[:k])
+        count = 0
+
+        if window_sum >= k * threshold:
+            count += 1
+
+        for i in range(k, len(arr)):
+            window_sum = window_sum - arr[i - k] + arr[i]
+
+            if window_sum >= k * threshold:
+                count += 1
+
+        return count
+```
+
+5. SUBSTRINGS OF SIZE THREE WITH DISTINCT CHARACTERS (LeetCode 1876)
+
+**CONCEPT:**
+
+Count the substrings of length 3 in which all three characters are different.
+
+**KEY POINTS:**
+
+- A substring contains consecutive characters.
+- Check each group of three characters.
+- `set()` stores only unique characters.
+- If `len(set(...)) == 3`, all three characters are different.
+- Increase the count for every valid substring.
+
+**CODE:**
+
+```python
+class Solution:
+    def countGoodSubstrings(self, s: str) -> int:
+        count = 0
+
+        for i in range(len(s) - 2):
+            if len(set(s[i:i + 3])) == 3:
+                count += 1
+
+        return count
+```
+
+6. MAXIMUM POINTS YOU CAN OBTAIN FROM CARDS (LeetCode 1423)
+
+**CONCEPT:**
+
+Choose exactly `k` cards from either end of the array to obtain the maximum possible score.
+
+**KEY POINTS:**
+
+- Cards can be taken only from the beginning or the end.
+- Initially, take the first `k` cards.
+- Replace one card from the beginning with one card from the end at each step.
+- Update the maximum score after every change.
+
+**CODE:**
+
+```python
+class Solution:
+    def maxScore(self, cardPoints: list[int], k: int) -> int:
+        current_sum = sum(cardPoints[:k])
+        max_sum = current_sum
+
+        for i in range(1, k + 1):
+            current_sum = current_sum - cardPoints[k - i] + cardPoints[-i]
+
+            if current_sum > max_sum:
+                max_sum = current_sum
+
+        return max_sum
+```
+
+7. LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS (LeetCode 3)
+
+**CONCEPT:**
+
+Find the length of the longest substring that contains no repeated characters.
+
+**KEY POINTS:**
+
+- Use two pointers, `left` and `right`, to represent the current window.
+- Use a set to store the characters in the window.
+- If a character repeats, remove characters from the left until the repeated character is removed.
+- Calculate the current length using `right - left + 1`.
+- Update and return the maximum length.
+
+**CODE:**
+
+```python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        seen = set()
+        left = 0
+        max_length = 0
+
+        for right in range(len(s)):
+            while s[right] in seen:
+                seen.remove(s[left])
+                left += 1
+
+            seen.add(s[right])
+
+            length = right - left + 1
+
+            if length > max_length:
+                max_length = length
+
+        return max_length

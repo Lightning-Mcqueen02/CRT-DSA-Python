@@ -1,0 +1,150 @@
+CRT TRAINING - DAY 2
+
+Date: 6 October 2026
+Language: Python 3
+
+
+1. NEW YEAR AND HURRY (Codeforces 750A)
+
+
+CONCEPT:
+
+Find the maximum number of problems a student can solve before the New Year celebration.
+
+KEY POINTS:
+
+Total available time = 240 minutes (4 hours).
+
+Travel time is given by k minutes.
+
+Time available for solving problems = 240 - k.
+
+The i-th problem takes 5 * i minutes.
+
+Count the problems that can be solved within the available time.
+
+CODE:
+
+n, k = map(int, input().split())
+
+time = 240 - k
+count = 0
+
+for i in range(1, n + 1):
+    time = time - 5 * i
+
+    if time >= 0:
+        count += 1
+    else:
+        break
+
+print(count)
+
+
+2. SUM OF DIGITS (GeeksforGeeks)
+
+CONCEPT:
+
+Find the sum of all digits present in a number.
+
+KEY POINTS:
+
+% 10 gives the last digit.
+
+Add the last digit to total.
+
+// 10 removes the last digit.
+
+Repeat until the number becomes 0.
+
+For example, the sum of digits of 1234 is 10.
+
+CODE:
+
+n = int(input())
+total = 0
+
+while n > 0:
+    digit = n % 10
+    total = total + digit
+    n = n // 10
+
+print(total)
+
+
+3. COUNT DIGITS IN A NUMBER (GeeksforGeeks)
+
+
+CONCEPT:
+
+Count the total number of digits present in a given number.
+
+KEY POINTS:
+
+% 10 gets the last digit.
+
+// 10 removes the last digit.
+
+Increase count for each digit.
+
+Repeat until the number becomes 0.
+
+Zero itself contains one digit.
+
+CODE:
+
+n = int(input())
+
+if n == 0:
+    count = 1
+else:
+    count = 0
+
+    while n > 0:
+        count += 1
+        n = n // 10
+
+print(count)
+
+
+4. REVERSE INTEGER (LeetCode 7)
+
+
+CONCEPT:
+
+Reverse the digits of a given integer. If the reversed number goes outside the signed 32-bit integer range, return 0.
+
+KEY POINTS:
+
+% 10 gets the last digit.
+
+rev * 10 + digit adds the digit to the reversed number.
+
+// 10 removes the last digit.
+
+Preserve the negative sign if the original number is negative.
+
+The valid range is from -2³¹ to 2³¹ - 1.
+
+Return 0 if the reversed result is outside this range.
+
+CODE:
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        sign = -1 if x < 0 else 1
+        x = abs(x)
+        rev = 0
+
+        while x > 0:
+            digit = x % 10
+            rev = rev * 10 + digit
+            x = x // 10
+
+        rev = rev * sign
+
+        if rev < -(2**31) or rev > 2**31 - 1:
+            return 0
+
+        return rev
+

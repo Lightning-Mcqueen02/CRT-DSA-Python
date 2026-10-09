@@ -1,0 +1,164 @@
+# CRT TRAINING - DAY 1
+Date: 5 October 2026
+Language: Python 3
+
+1. EVEN NUMBERS
+
+CONCEPT:
+An even number is divisible by 2 without a remainder.
+
+KEY POINTS:
+- % gives the remainder.
+- If n % 2 == 0, the number is even.
+- Otherwise, the number is odd.
+
+CODE:
+
+n = int(input())
+
+if n % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
+
+
+2. PRIME NUMBER
+
+CONCEPT:
+A prime number is greater than 1 and has exactly two factors: 1 and itself.
+
+KEY POINTS:
+- Numbers less than or equal to 1 are not prime.
+- Check whether any number from 2 to n-1 divides n.
+- If a divisor exists, the number is not prime.
+
+CODE:
+
+n = int(input())
+
+if n <= 1:
+    print("Not Prime")
+else:
+    prime = True
+
+    for i in range(2, n):
+        if n % i == 0:
+            prime = False
+            break
+
+    if prime:
+        print("Prime")
+    else:
+        print("Not Prime")
+
+
+
+3. SECONDS INTO HOURS:MINUTES:SECONDS
+
+CONCEPT:
+Convert total seconds into hours, minutes and remaining seconds.
+
+KEY POINTS:
+- 1 hour = 3600 seconds.
+- 1 minute = 60 seconds.
+- // gives the quotient.
+- % gives the remainder.
+
+CODE:
+
+n = int(input())
+
+hours = n // 3600
+minutes = (n % 3600) // 60
+seconds = n % 60
+
+print(hours, ":", minutes, ":", seconds, sep="")
+
+
+
+4. LEAP YEAR
+
+
+CONCEPT:
+A leap year has 366 days. February has 29 days.
+
+KEY POINTS:
+- Divisible by 400: leap year.
+- Divisible by 100 but not 400: not a leap year.
+- Divisible by 4 but not 100: leap year.
+- Otherwise: not a leap year.
+
+CODE:
+
+year = int(input())
+
+if year % 400 == 0:
+    print("Leap Year")
+elif year % 100 == 0:
+    print("Not Leap Year")
+elif year % 4 == 0:
+    print("Leap Year")
+else:
+    print("Not Leap Year")
+
+
+5. ODD DIVISORS OR NOT
+CODEFORCES 1475A
+
+
+CONCEPT:
+Determine whether n has an odd divisor greater than 1.
+
+KEY POINTS:
+- Powers of 2 have no odd divisor greater than 1.
+- Divide n by 2 repeatedly while it is even.
+- If the remaining value is greater than 1, print YES.
+- Otherwise, print NO.
+- The input contains multiple test cases.
+
+CODE:
+
+t = int(input())
+
+for i in range(t):
+    n = int(input())
+
+    while n % 2 == 0:
+        n = n // 2
+
+    if n > 1:
+        print("YES")
+    else:
+        print("NO")
+
+
+==================================================
+6. CHEAP TRAVEL
+CODEFORCES 466A
+==================================================
+
+CONCEPT:
+Find the minimum cost of travelling n rides using single tickets and special tickets.
+
+INPUT:
+n = number of rides required
+m = rides covered by one special ticket
+a = price of one single ticket
+b = price of one special ticket
+
+KEY POINTS:
+- Cost using only single tickets = n * a.
+- n // m gives complete groups.
+- n % m gives remaining rides.
+- Compare single tickets and one additional special ticket for the remainder.
+- Print the minimum cost.
+
+CODE:
+
+n, m, a, b = map(int, input().split())
+
+cost1 = n * a
+cost2 = (n // m) * b + min((n % m) * a, b)
+
+print(min(cost1, cost2))
+

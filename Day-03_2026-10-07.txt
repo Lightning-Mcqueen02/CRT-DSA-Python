@@ -1,0 +1,258 @@
+CRT TRAINING - DAY 3
+
+Date: 7 October 2026  
+Language: Python 3
+
+ 1. TOP K FREQUENT ELEMENTS (LeetCode 347)
+
+
+**CONCEPT:**
+
+Find the `k` elements that appear most frequently in the given array.
+
+**KEY POINTS:**
+
+- A dictionary stores each number and its frequency.
+- `freq[i] = freq.get(i, 0) + 1` counts occurrences.
+- `sorted()` arranges elements based on frequency.
+- Select the first `k` elements with the highest frequency.
+
+**CODE:**
+
+```python
+class Solution:
+    def topKFrequent(self, nums: list[int], k: int) -> list[int]:
+        freq = {}
+
+        for i in nums:
+            freq[i] = freq.get(i, 0) + 1
+
+        result = sorted(freq, key=lambda x: freq[x], reverse=True)
+
+        return result[:k]
+
+
+ 2. CONTAINS DUPLICATE (LeetCode 217)
+
+
+**CONCEPT:**
+
+Check whether any number appears more than once in the array.
+
+**KEY POINTS:**
+
+- A duplicate means the same element appears at least twice.
+- A set stores only unique elements.
+- If the length of the set is smaller than the original list, a duplicate exists.
+- Return `True` if a duplicate exists; otherwise, return `False`.
+
+**CODE:**
+
+```python
+class Solution:
+    def containsDuplicate(self, nums: list[int]) -> bool:
+        if len(set(nums)) < len(nums):
+            return True
+        else:
+            return False
+
+
+
+ 3. VALID ANAGRAM (LeetCode 242)
+
+
+
+**CONCEPT:**
+
+Check whether two strings contain the same characters with the same frequencies, even if their order is different.
+
+**KEY POINTS:**
+
+- An anagram contains the same characters in a different order.
+- Both strings must have the same length.
+- `sorted()` arranges characters in alphabetical order.
+- If both sorted strings are equal, they are anagrams.
+
+**CODE:**
+
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if sorted(s) == sorted(t):
+            return True
+        else:
+            return False
+```
+
+ 4. ROTATE ARRAY (LeetCode 189)
+
+**CONCEPT:**
+
+Rotate the array to the right by `k` positions.
+
+**KEY POINTS:**
+
+- The last element moves to the beginning when rotating right by one position.
+- `k % len(nums)` handles rotations greater than the array length.
+- Slicing can separate the last `k` elements and move them to the front.
+- Update `nums[:]` to modify the original array.
+
+**CODE:**
+
+```python
+class Solution:
+    def rotate(self, nums: list[int], k: int) -> None:
+        k = k % len(nums)
+        nums[:] = nums[-k:] + nums[:-k] if k != 0 else nums
+```
+
+
+ 5. LEFT-ALIGNED TRIANGLE PATTERN
+
+
+**CONCEPT:**
+
+Print a triangle in which each row contains one more star than the previous row.
+
+**OUTPUT (n = 5):**
+
+```text
+*
+* *
+* * *
+* * * *
+* * * * *
+```
+
+**KEY POINTS:**
+
+- The outer loop controls the rows.
+- The inner loop prints the stars in each row.
+- Row 1 has 1 star, row 2 has 2 stars, and so on.
+
+**CODE:**
+
+```python
+n = int(input())
+
+for i in range(1, n + 1):
+    for j in range(i):
+        print("*", end=" ")
+    print()
+```
+
+
+ 6. RIGHT-ALIGNED TRIANGLE PATTERN
+
+**CONCEPT:**
+
+Print a triangle aligned to the right by adding spaces before the stars.
+
+**OUTPUT (n = 5):**
+
+```text
+        *
+      * *
+    * * *
+  * * * *
+* * * * *
+```
+
+**KEY POINTS:**
+
+- The outer loop controls the rows.
+- Spaces decrease in each row.
+- Stars increase in each row.
+- `end=""` prints spaces and stars on the same line.
+
+**CODE:**
+
+```python
+n = int(input())
+
+for i in range(1, n + 1):
+    for j in range(n - i):
+        print("  ", end="")
+    for j in range(i):
+        print("* ", end="")
+    print()
+```
+
+
+
+ 7. HOLLOW SQUARE PATTERN
+
+
+**CONCEPT:**
+
+Print a square with stars on its boundary and empty spaces inside.
+
+**OUTPUT (n = 5):**
+
+```text
+* * * * *
+*       *
+*       *
+*       *
+* * * * *
+```
+
+**KEY POINTS:**
+
+- The outer loop controls rows.
+- The inner loop controls columns.
+- Print a star on the first row or last row.
+- Print a star in the first column or last column.
+- Print a space for the remaining positions.
+
+**CODE:**
+
+```python
+n = int(input())
+
+for i in range(n):
+    for j in range(n):
+        if i == 0 or i == n - 1 or j == 0 or j == n - 1:
+            print("*", end=" ")
+        else:
+            print(" ", end=" ")
+    print()
+```
+
+
+
+ 8. PYRAMID PATTERN
+
+
+**CONCEPT:**
+
+Print a pyramid with spaces on the left and an increasing number of stars in each row.
+
+**OUTPUT (n = 5):**
+
+```text
+    *
+   ***
+  *****
+ *******
+*********
+```
+
+**KEY POINTS:**
+
+- The outer loop controls the rows.
+- Spaces decrease in each row.
+- The number of stars increases by 2 in each row.
+- Stars in each row = `2 * i - 1`.
+
+**CODE:**
+
+```python
+n = int(input())
+
+for i in range(1, n + 1):
+    for j in range(n - i):
+        print(" ", end="")
+    for j in range(2 * i - 1):
+        print("*", end="")
+    print()

@@ -1,0 +1,401 @@
+CRT TRAINING - DAY 4
+
+Date: 8 October 2026  
+Language: Python 3
+
+ 1. TWO SUM (LeetCode 1)
+
+**CONCEPT:**
+
+Find the indices of two elements whose sum equals the given target.
+
+**KEY POINTS:**
+
+- A dictionary stores numbers and their indices.
+- `target - nums[i]` finds the number needed to complete the sum.
+- Return the indices, not the elements.
+- The same element cannot be used twice.
+
+**CODE:**
+
+```python
+class Solution:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        d = {}
+
+        for i in range(len(nums)):
+            need = target - nums[i]
+
+            if need in d:
+                return [d[need], i]
+
+            d[nums[i]] = i
+
+
+ 2. LARGEST ELEMENT IN AN ARRAY (GeeksforGeeks)
+
+
+**CONCEPT:**
+
+Find the largest element present in the array.
+
+**KEY POINTS:**
+
+- Assume the first element is the largest initially.
+- Compare every element with the current maximum.
+- Update the maximum whenever a larger element is found.
+
+**CODE:**
+
+```python
+class Solution:
+    def largest(self, arr):
+        maximum = arr[0]
+
+        for i in arr:
+            if i > maximum:
+                maximum = i
+
+        return maximum
+```
+
+
+3. ROTATE ARRAY BY ONE (GeeksforGeeks)
+
+**CONCEPT:**
+
+Rotate the array clockwise by one position. The last element moves to the first position.
+
+**EXAMPLE:**
+
+Input: `[1, 2, 3, 4, 5]`
+
+Output: `[5, 1, 2, 3, 4]`
+
+**KEY POINTS:**
+
+- Store the last element.
+- Move all other elements one position to the right.
+- Place the last element at index 0.
+
+**CODE:**
+
+```python
+class Solution:
+    def rotate(self, arr):
+        last = arr.pop()
+        arr.insert(0, last)
+
+        return arr
+
+
+ 4. MINIMUM AND MAXIMUM IN AN ARRAY (GeeksforGeeks)
+
+
+**CONCEPT:**
+
+Find both the smallest and the largest elements in an array.
+
+**KEY POINTS:**
+
+- Initialize minimum and maximum with the first element.
+- If an element is smaller, update minimum.
+- If an element is larger, update maximum.
+
+**CODE:**
+
+```python
+class Solution:
+    def getMinMax(self, arr):
+        minimum = arr[0]
+        maximum = arr[0]
+
+        for i in arr:
+            if i < minimum:
+                minimum = i
+
+            if i > maximum:
+                maximum = i
+
+        return minimum, maximum
+
+
+ 5. SUM OF ARRAY ELEMENTS
+
+
+**CONCEPT:**
+
+Calculate the sum of all the elements in an array.
+
+**KEY POINTS:**
+
+- Initialize the total to 0.
+- Add each element to the total.
+- Return the final sum.
+
+**CODE:**
+
+```python
+class Solution:
+    def arraySum(self, arr):
+        total = 0
+
+        for i in arr:
+            total = total + i
+
+        return total
+
+
+6. ALTERNATES IN AN ARRAY (GeeksforGeeks)
+
+**CONCEPT:**
+
+Print the elements at alternate positions, starting from the first element.
+
+**EXAMPLE:**
+
+Input: `[10, 20, 30, 40, 50]`
+
+Output: `[10, 30, 50]`
+
+**KEY POINTS:**
+
+- Array indexing starts from 0.
+- The required indices are 0, 2, 4, and so on.
+- Increase the index by 2 each time.
+
+**CODE:**
+
+```python
+class Solution:
+    def getAlternates(self, arr):
+        result = []
+
+        for i in range(0, len(arr), 2):
+            result.append(arr[i])
+
+        return result
+```
+
+
+ 7. REPLACE ALL 0s WITH 5
+
+
+**CONCEPT:**
+
+Replace every digit 0 in a number with the digit 5.
+
+**EXAMPLE:**
+
+Input: `1020`
+
+Output: `1525`
+
+**KEY POINTS:**
+
+- Convert the number into a string.
+- Use `replace()` to change every `"0"` to `"5"`.
+- Convert the result back to an integer.
+- If the input is 0, the output should be 5.
+
+**CODE:**
+
+```python
+class Solution:
+    def convertFive(self, n):
+        return int(str(n).replace("0", "5"))
+
+
+ 8. PALINDROME ARRAY
+
+
+
+**CONCEPT:**
+
+An array is a palindrome if it reads the same from left to right and right to left.
+
+**EXAMPLE:**
+
+Input: `[1, 2, 3, 2, 1]`
+
+Output: `True`
+
+**KEY POINTS:**
+
+- Reverse the array.
+- Compare the reversed array with the original.
+- If both are equal, it is a palindrome.
+
+**CODE:**
+
+```python
+class Solution:
+    def isPalindrome(self, arr):
+        if arr == arr[::-1]:
+            return True
+        else:
+            return False
+
+
+ 9. SORT COLORS (LeetCode 75)
+
+
+**CONCEPT:**
+
+Sort an array containing only 0s, 1s, and 2s in ascending order.
+
+**KEY POINTS:**
+
+- 0 represents red, 1 represents white, and 2 represents blue.
+- Count how many 0s, 1s, and 2s appear.
+- Rebuild the array in sorted order.
+- Modify the original array.
+
+**CODE:**
+
+```python
+class Solution:
+    def sortColors(self, nums: list[int]) -> None:
+        count0 = nums.count(0)
+        count1 = nums.count(1)
+        count2 = nums.count(2)
+
+        nums[:] = [0] * count0 + [1] * count1 + [2] * count2
+
+
+10. MOVE ZEROES (LeetCode 283)
+
+**CONCEPT:**
+
+Move all zeros to the end of the array while keeping the order of non-zero elements unchanged.
+
+**EXAMPLE:**
+
+Input: `[0, 1, 0, 3, 12]`
+
+Output: `[1, 3, 12, 0, 0]`
+
+**KEY POINTS:**
+
+- Collect all non-zero elements in their original order.
+- Count the zeros.
+- Add the zeros at the end.
+- Update the original list using `nums[:]`.
+
+**CODE:**
+
+```python
+class Solution:
+    def moveZeroes(self, nums: list[int]) -> None:
+        nonzero = []
+
+        for i in nums:
+            if i != 0:
+                nonzero.append(i)
+
+        zeros = len(nums) - len(nonzero)
+
+        nums[:] = nonzero + [0] * zeros
+
+
+11. DUTCH NATIONAL FLAG ALGORITHM
+
+**CONCEPT:**
+
+Sort an array containing only 0s, 1s, and 2s in a single pass using three pointers.
+
+**KEY POINTS:**
+
+- `low` tracks where the next 0 should go.
+- `mid` examines the current element.
+- `high` tracks where the next 2 should go.
+- If the element is 0, swap it with `low` and advance both `low` and `mid`.
+- If the element is 1, advance `mid`.
+- If the element is 2, swap it with `high` and decrease `high`.
+
+**CODE:**
+
+```python
+class Solution:
+    def sortColors(self, nums: list[int]) -> None:
+        low = 0
+        mid = 0
+        high = len(nums) - 1
+
+        while mid <= high:
+            if nums[mid] == 0:
+                nums[low], nums[mid] = nums[mid], nums[low]
+                low += 1
+                mid += 1
+
+            elif nums[mid] == 1:
+                mid += 1
+
+            else:
+                nums[mid], nums[high] = nums[high], nums[mid]
+                high -= 1
+
+
+## 12. ARRAY WITH ALL PALINDROMES
+
+
+**CONCEPT:**
+
+Check whether every element in an array is a palindrome number.
+
+**EXAMPLE:**
+
+Input: `[121, 22, 131]`
+
+Output: `True`
+
+**KEY POINTS:**
+
+- Convert each number to a string.
+- Reverse the string using slicing.
+- Compare the original string with the reversed string.
+- If any element is not a palindrome, return `False`.
+- If all elements are palindromes, return `True`.
+
+**CODE:**
+
+```python
+class Solution:
+    def isPalinArray(self, arr):
+        for i in arr:
+            s = str(i)
+
+            if s != s[::-1]:
+                return False
+
+        return True
+
+
+## 13. REVERSE ARRAY IN GROUPS (GeeksforGeeks)
+
+**CONCEPT:**
+
+Reverse the elements of an array in groups of size `k`. The last group may contain fewer than `k` elements.
+
+**EXAMPLE:**
+
+Input: `arr = [1, 2, 3, 4, 5, 6, 7, 8]`, `k = 3`
+
+Output: `[3, 2, 1, 6, 5, 4, 8, 7]`
+
+**KEY POINTS:**
+
+- Start at index 0.
+- Reverse each group of `k` elements.
+- Move to the next group.
+- Reverse the remaining elements if the last group is smaller than `k`.
+
+**CODE:**
+
+```python
+class Solution:
+    def reverseInGroups(self, arr, k):
+        for i in range(0, len(arr), k):
+            arr[i:i + k] = arr[i:i + k][::-1]
+
+        return arr
